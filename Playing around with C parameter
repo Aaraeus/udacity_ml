@@ -1,0 +1,40 @@
+#!/usr/bin/python3
+
+"""
+Playing around with C parameter
+
+"""
+
+import sys
+from time import time
+
+sys.path.append(r"C:\Users\Kintesh\Desktop\code\udacity_ml\ud120-projects-master\choose_your_own")
+from prep_terrain_data import makeTerrainData
+
+### features_train and features_test are the features for the training
+### and testing datasets, respectively
+### labels_train and labels_test are the corresponding item labels
+features_train, features_test, labels_train, labels_test = makeTerrainData()
+
+#########################################################
+
+
+from sklearn import svm
+from class_vis import prettyPicture
+
+# Choose classifier
+clf = svm.SVC(kernel="rbf", C=1000)
+# Fit my data, so train using this classifier using the training features and training labels
+
+clf.fit(features_train, features_test)
+
+pred = clf.predict(labels_train)
+
+prettyPicture(clf, labels_train, labels_test)
+
+# Cool, that's 97.3% accuracy! Ok, so what does this mean?!
+
+
+#########################################################
+
+
