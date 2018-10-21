@@ -29,6 +29,9 @@ from sklearn import svm
 # from class_vis import prettyPicture
 from sklearn.metrics import accuracy_score
 
+print("-"*10)
+print("SIZES OF DATA")
+print("-"*10)
 print("Features Train:")
 print(features_train.shape)
 print("Features Test:")
@@ -37,22 +40,30 @@ print("Labels Train:")
 print(len(labels_train))
 print("Labels Test:")
 print(len(labels_test))
+print("-"*10)
 
 # Choose classifier
 clf = svm.SVC(kernel="linear", C=1, gamma=1)
 
 # fit the model using training data
+t0 = time()
 clf.fit(features_train, labels_train)
+print("Training time:", round(time()-t0, 3), "s")
 
 # predict based on training data
+t1 = time()
 pred = clf.predict(features_test)
+print("Prediction time:", round(time()-t1, 3), "s")
 
 # Show pic!
 # prettyPicture(clf, features_train, features_test)
 
 
 # Use accuracy score to determine accuracy
+print("-"*10)
+print("Accuracy score: ")
 print(accuracy_score(pred, labels_test))
+print("-"*10)
 
 #########################################################
 
