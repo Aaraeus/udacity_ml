@@ -31,8 +31,8 @@ from sklearn.metrics import accuracy_score
 
 
 # Minimise data to 1% of original size to see accuracy difference
-features_train = features_train[:int(len(features_train)/100)]
-labels_train = labels_train[:int(len(labels_train)/100)]
+# features_train = features_train[:int(len(features_train)/100)]
+# labels_train = labels_train[:int(len(labels_train)/100)]
 
 print("-"*10)
 print("SIZES OF DATA")
@@ -48,7 +48,9 @@ print(len(labels_test))
 print("-"*10)
 
 # Choose classifier
-clf = svm.SVC(kernel="linear", C=1, gamma=1)
+clf = svm.SVC(kernel="rbf", C=10000)
+
+print(clf)
 
 # fit the model using training data
 t0 = time()
@@ -69,6 +71,22 @@ print("-"*10)
 print("Accuracy score: ")
 print(accuracy_score(pred, labels_test))
 print("-"*10)
+
+# Find predictions for elements 10, 26 and 50 of the test data (using 1% training set)
+
+to_find = [10, 26, 50]
+
+for i in range(len(to_find)):
+    val = to_find[i]
+    answer = pred[val]
+    print("Prediction for element number " + str(val) + " is: ")
+    print(answer)
+
+# There are over 1700 test events--how many are predicted to be in the “Chris” (1) class?
+# (Use the RBF kernel, C=10000., and the full training set.)
+
+total_chris = sum(pred)
+print("Total number of Chris predictions: " + str(total_chris))
 
 #########################################################
 
