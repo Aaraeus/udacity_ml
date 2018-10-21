@@ -26,8 +26,17 @@ features_train, features_test, labels_train, labels_test = preprocess()
 
 #########################################################
 from sklearn import svm
-from class_vis import prettyPicture
+# from class_vis import prettyPicture
 from sklearn.metrics import accuracy_score
+
+print("Features Train:")
+print(features_train.shape)
+print("Features Test:")
+print(features_test.shape)
+print("Labels Train:")
+print(len(labels_train))
+print("Labels Test:")
+print(len(labels_test))
 
 # Choose classifier
 clf = svm.SVC(kernel="linear", C=1, gamma=1)
@@ -39,7 +48,7 @@ clf.fit(features_train, labels_train)
 pred = clf.predict(features_test)
 
 # Show pic!
-prettyPicture(clf, features_train, labels_train)
+# prettyPicture(clf, features_train, features_test)
 
 
 # Use accuracy score to determine accuracy
