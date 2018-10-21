@@ -29,6 +29,11 @@ from sklearn import svm
 # from class_vis import prettyPicture
 from sklearn.metrics import accuracy_score
 
+
+# Minimise data to 1% of original size to see accuracy difference
+features_train = features_train[:int(len(features_train)/100)]
+labels_train = labels_train[:int(len(labels_train)/100)]
+
 print("-"*10)
 print("SIZES OF DATA")
 print("-"*10)
