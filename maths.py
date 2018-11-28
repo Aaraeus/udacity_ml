@@ -14,3 +14,21 @@ information_gain = 1 - ((3/4)*entropy + (1/4)*0)
 
 print("Information gain is: " + str(information_gain))
 
+x1 = 20
+x2 = 80
+
+# x1 = 40
+# x2 = 80
+
+# x1 = 60
+# x2 = 80
+
+# x1 = 20
+# x2 = 100
+
+# x1 = 20
+# x2 = 120
+
+y = 5 * x1 + 2.5 * x2 - 200
+
+print(y)
