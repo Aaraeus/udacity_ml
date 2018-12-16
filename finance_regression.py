@@ -16,14 +16,18 @@
 
 import sys
 import pickle
-sys.path.append("/Users/kintesh/Documents/udacity_ml/python3/ud120-projects/tools")
+# sys.path.append("/Users/kintesh/Documents/udacity_ml/python3/ud120-projects/tools")
+sys.path.append(r"C:\Users\Kintesh\Desktop\code\udacity_ml\ud120-projects-master\tools")
 from feature_format import featureFormat, targetFeatureSplit
-dictionary = pickle.load( open("/Users/kintesh/Documents/udacity_ml/python3/ud120-projects/final_project/final_project_dataset_modified.pkl", "rb") )
+# dictionary = pickle.load( open("/Users/kintesh/Documents/udacity_ml/python3/ud120-projects/final_project/final_project_dataset_modified.pkl", "rb") )
+dictionary = pickle.load( open(r"C:\Users\Kintesh\Desktop\code\udacity_ml\ud120-projects-master\final_project/final_project_dataset_modified.pkl", "rb") )
 
 ### list the features you want to look at--first item in the 
 ### list will be the "target" feature
 features_list = ["bonus", "salary"]
-data = featureFormat( dictionary, features_list, remove_any_zeroes=True, sort_keys = '/Users/kintesh/Documents/udacity_ml/python3/ud120-projects/tools/python2_lesson06_keys.pkl')
+# data = featureFormat( dictionary, features_list, remove_any_zeroes=True, sort_keys = '/Users/kintesh/Documents/udacity_ml/python3/ud120-projects/tools/python2_lesson06_keys.pkl')
+data = featureFormat( dictionary, features_list, remove_any_zeroes=True, sort_keys = r"C:\Users\Kintesh\Desktop\code\udacity_ml\ud120-projects-master\tools\python2_lesson06_keys.pkl")
+
 target, features = targetFeatureSplit( data )
 
 ### training-testing split needed in regression, just like classification
@@ -49,23 +53,11 @@ reg.fit(feature_train, target_train)
 print("Coefficient is: " + str(reg.coef_))
 print("Intercept is: " + str(reg.intercept_))
 
-pred = reg.predict(feature_train)
+pred = reg.predict(feature_test)
 
-pred2 = pred.tolist()
+print("Score Training (Not what we should be doing):", reg.score(feature_train, target_train))
+print("Score Testing (The correct way):", reg.score(feature_test, target_test))
 
-print("-"*20)
-print(target_train)
-print("-"*20)
-print(pred2)
-
-print("Length of target: " + str(len(target_train)))
-print("Length of prediction: " + str(len(pred2)))
-
-#
-# from sklearn.metrics import accuracy_score
-# accuracy = accuracy_score(target_train, pred2)
-#
-# print("Accuracy Score is: " + str(accuracy))
 
 ### draw the scatterplot, with color-coded training and testing points
 import matplotlib.pyplot as plt
@@ -86,6 +78,10 @@ try:
     plt.plot( feature_test, reg.predict(feature_test) )
 except NameError:
     pass
+reg.fit(feature_test, target_test)
+print("New Slope with training data without outlier:", reg.coef_)
+plt.plot(feature_train, reg.predict(feature_train), color="b")
+
 plt.xlabel(features_list[1])
 plt.ylabel(features_list[0])
 plt.legend()
